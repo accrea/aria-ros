@@ -1,0 +1,43 @@
+<launch>
+    <!--    init arguments-->
+    <arg name="use_ros_control" default="false"/>
+    <arg name="arm_type" default="aria_v2"/>
+    <arg name="use_joint_trajectory_controller_gui" default="false"/>
+
+    <!--    loading connection config, joint names and robot description from urdf-->
+    <rosparam file="$(find aria_startup)/config/connection_config.yaml" command="load"/>
+    <rosparam file="$(find aria_description)/config/$(arg arm_type)_joint_names.yaml" command="load"/>
+    <param name="robot_description"
+           command="$(find xacro)/xacro '$(find aria_description)/urdf/$(arg arm_type).urdf.xacro' "/>
+
+    <!--    if don't use ros control, control arm by incoming ROS topics-->
+    <group unless="$(arg use_ros_control)">
+        <node name="$(arg arm_type)_ros_driver" pkg="aria_driver" type="aria_ros" output="screen" cwd="node"
+              required="true">
+        </node>
+    </group>
+
+    <!--    if use ros control-->
+    <group if="$(arg use_ros_control)">
+        <node name="$(arg arm_type)_ros_control_driver" pkg="aria_driver" type="aria_ros_control" output="screen"
+              cwd="node"
+              required="true">
+        </node>
+
+        <rosparam file="$(find aria_driver)/config/$(arg arm_type)_controllers.yaml"/>
+        <node name="controller_spawner" type="spawner" pkg="controller_manager" respawn="false" output="screen" ns="/"
+              args="joint_state_controller arm_trajectory_controller gripper_controller">
+        </node>
+
+        <group if="$(arg use_joint_trajectory_controller_gui)">
+            <node pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" name="rqt_joint_trajectory_controller" />
+        </group>
+    </group>
+
+    <!-- load joint state publisher-->
+    <node name="$(arg arm_type)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    </node>
+
+    <!--    load robot state publisher-->
+    <node name="$(arg arm_type)_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+</launch>

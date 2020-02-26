@@ -1,0 +1,35 @@
+<launch>
+    <arg name="arm_type" default="aria_v2"/>
+    <arg name="use_sim_time" default="true"/>
+    <!--    load robot description  -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro --inorder '$(find aria_description)/urdf/$(arg arm_type).urdf.xacro'"/>
+
+    <!--    start Gazebo with empty world   -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    </include>
+
+    <!--    spawn model     -->
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg arm_type)_arm_model" output="screen" respawn="false"
+          args="-param robot_description -urdf -model $(arg arm_type)_arm -z 1.0 ">
+    </node>
+
+    <!--    load controllers -->
+    <rosparam file="$(find aria_control)/config/$(arg arm_type)_controllers.yaml" command="load"/>
+    <node name="$(arg arm_type)_controller_manager" pkg="controller_manager" type="spawner" output="screen"
+          respawn="false"
+          args="joint_state_controller arm_trajectory_controller gripper_controller"> 
+    </node>
+
+    <!-- Fake Calibration -->
+    <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+          args="pub /calibrated std_msgs/Bool true"/>
+
+    <!--    Start robot state publisher     -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="$(arg arm_type)_state_publisher"/>
+
+    <!--    Start teleop controll   -->
+    <node pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller"
+          name="$(arg arm_type)_rqt_joint_trajectory_controller"/>
+</launch>
