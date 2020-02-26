@@ -31,7 +31,7 @@ We assume you are using Ubuntu 18.04 LTS and ROS Melodic. If you're not sure wha
 To add `aria-ros` package to your workspace, run the following commands:
 ```
 cd ~/path_to_your_workspace/src
-git clone 
+git clone https://github.com/accrea/aria-ros
 cd ~/path_to_your_workspace
 catkin_make
 ```
