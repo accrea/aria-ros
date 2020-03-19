@@ -3,21 +3,36 @@
     <arg name="gui" default="true"/>
     <arg name="arm_type" default="aria_v2"/>
 
-<!--    load robot description  -->
+    <!--    load robot description  -->
     <param name="robot_description"
-           command="$(find xacro)/xacro '$(find aria_v2_description)/urdf/$(arg arm_type).urdf.xacro'"/>
+           command="$(find xacro)/xacro '$(find aria_description)/urdf/$(arg arm_type).urdf.xacro'"/>
 
     <!--    spawn Aria arm in initial position  -->
-    <node name="$(arg arm_type)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-        <param name="use_gui" value="$(arg gui)"/>
-        <param name="zeros/arm_joint_1" value="0.014"/>
-        <param name="zeros/arm_joint_2" value="1.587"/>
-        <param name="zeros/arm_joint_3" value="-2.54"/>
-        <param name="zeros/arm_joint_4" value="2.471"/>
-        <param name="zeros/arm_joint_5" value="-1.036"/>
-        <param name="zeros/arm_joint_6" value="1.9"/>
-        <param name="zeros/finger_joint_1" value="0"/>
-    </node>
+    <group if="$(eval arg('arm_type') =='aria_v2')">
+        <node name="$(arg arm_type)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+            <param name="use_gui" value="$(arg gui)"/>
+            <param name="zeros/arm_joint_1" value="0.014"/>
+            <param name="zeros/arm_joint_2" value="1.587"/>
+            <param name="zeros/arm_joint_3" value="-2.54"/>
+            <param name="zeros/arm_joint_4" value="2.471"/>
+            <param name="zeros/arm_joint_5" value="-1.036"/>
+            <param name="zeros/arm_joint_6" value="1.9"/>
+            <param name="zeros/finger_joint_1" value="0"/>
+        </node>
+    </group>
+
+    <group if="$(eval arg('arm_type') =='aria_v1')">
+        <node name="$(arg arm_type)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+            <param name="use_gui" value="$(arg gui)"/>
+            <param name="zeros/Joint1" value="0.014"/>
+            <param name="zeros/Joint2" value="1.587"/>
+            <param name="zeros/Joint3" value="-2.54"/>
+            <param name="zeros/Joint4" value="2.471"/>
+            <param name="zeros/Joint5" value="-1.036"/>
+            <param name="zeros/Joint6" value="1.9"/>
+            <param name="zeros/FJoint1" value="0"/>
+        </node>
+    </group>
 
     <node name="$(arg arm_type)_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find aria_description)/urdf.rviz"/>

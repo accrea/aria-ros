@@ -37,6 +37,8 @@ public:
     void placeOnTable2(moveit::planning_interface::MoveGroupInterface &group);
 
 private:
+    ros::NodeHandle nh;
+    std::string arm_type;
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface; // moveit planning interface
     std::vector<moveit_msgs::CollisionObject> collision_objects; // objects
     std::vector<moveit_msgs::Grasp> grasps_table_1, grasps_table_2; //grasps vectors

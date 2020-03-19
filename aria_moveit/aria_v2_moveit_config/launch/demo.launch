@@ -10,6 +10,7 @@
 
   <!-- By default, we are not in debug mode -->
   <arg name="debug" default="false" />
+  <param name="arm_type" value="aria_v2" />
 
   <!--
   By default, hide joint_state_publisher's GUI

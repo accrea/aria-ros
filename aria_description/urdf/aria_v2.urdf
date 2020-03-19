@@ -26,7 +26,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/base_link.STL" />
+          filename="package://aria_description/meshes/aria_v2/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -40,7 +40,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/base_link.STL" />
+          filename="package://aria_description/meshes/aria_v2/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -66,7 +66,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C2.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C2.STL" />
       </geometry>
       <material
         name="">
@@ -80,7 +80,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C2.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C2.STL" />
       </geometry>
     </collision>
   </link>
@@ -124,7 +124,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C3.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C3.STL" />
       </geometry>
       <material
         name="">
@@ -138,7 +138,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C3.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C3.STL" />
       </geometry>
     </collision>
   </link>
@@ -182,7 +182,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C4.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C4.STL" />
       </geometry>
       <material
         name="">
@@ -196,7 +196,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C4.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C4.STL" />
       </geometry>
     </collision>
   </link>
@@ -240,7 +240,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C5.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C5.STL" />
       </geometry>
       <material
         name="">
@@ -254,7 +254,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C5.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C5.STL" />
       </geometry>
     </collision>
   </link>
@@ -298,7 +298,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C6.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C6.STL" />
       </geometry>
       <material
         name="">
@@ -312,7 +312,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_C6.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_C6.STL" />
       </geometry>
     </collision>
   </link>
@@ -356,7 +356,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_Griper.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_Griper.STL" />
       </geometry>
       <material
         name="">
@@ -370,7 +370,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Link_Griper.STL" />
+          filename="package://aria_description/meshes/aria_v2/Link_Griper.STL" />
       </geometry>
     </collision>
   </link>
@@ -414,7 +414,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Finger_1.STL" />
+          filename="package://aria_description/meshes/aria_v2/Finger_1.STL" />
       </geometry>
       <material
         name="">
@@ -428,7 +428,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Finger_1.STL" />
+          filename="package://aria_description/meshes/aria_v2/Finger_1.STL" />
       </geometry>
     </collision>
   </link>
@@ -472,7 +472,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Finger_2.STL" />
+          filename="package://aria_description/meshes/aria_v2/Finger_2.STL" />
       </geometry>
       <material
         name="">
@@ -486,7 +486,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Finger_2.STL" />
+          filename="package://aria_description/meshes/aria_v2/Finger_2.STL" />
       </geometry>
     </collision>
   </link>
@@ -531,7 +531,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Finger_3.STL" />
+          filename="package://aria_description/meshes/aria_v2/Finger_3.STL" />
       </geometry>
       <material
         name="">
@@ -545,7 +545,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://aria_description/meshes/Finger_3.STL" />
+          filename="package://aria_description/meshes/aria_v2/Finger_3.STL" />
       </geometry>
     </collision>
   </link>

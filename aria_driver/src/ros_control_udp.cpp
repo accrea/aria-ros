@@ -14,6 +14,7 @@ RosControlUdp::RosControlUdp() {
     nh.param("/port_in", port_in, 7777);
     nh.param("/port_out", port_out, 7777);
     nh.param<std::string>("/remote_ip", remote_ip, "192.168.9.9");
+    nh.getParam("/joint_names", joint_names);
 
 //    init ROS subscribers
     arm_mode_sub = nh.subscribe("in/arm_mode", 10, &RosControlUdp::armModeCallback, this);
@@ -22,15 +23,18 @@ RosControlUdp::RosControlUdp() {
             &RosControlUdp::cartessianPoseCallback, this);
 
     //    resize vectors
-    joint_names.push_back("arm_joint_1");
-    joint_names.push_back("arm_joint_2");
-    joint_names.push_back("arm_joint_3");
-    joint_names.push_back("arm_joint_4");
-    joint_names.push_back("arm_joint_5");
-    joint_names.push_back("arm_joint_6");
-    joint_names.push_back("finger_joint_1");
-    joint_names.push_back("finger_joint_2");
-    joint_names.push_back("finger_joint_3");
+//    joint_names.push_back("arm_joint_1");
+//    joint_names.push_back("arm_joint_2");
+//    joint_names.push_back("arm_joint_3");
+//    joint_names.push_back("arm_joint_4");
+//    joint_names.push_back("arm_joint_5");
+//    joint_names.push_back("arm_joint_6");
+//    joint_names.push_back("finger_joint_1");
+//    joint_names.push_back("finger_joint_2");
+//    joint_names.push_back("finger_joint_3");
+//    for (size_t k = 0; k < joint_names.size(); ++k) {
+//        std::cout << joint_names[k] << std::endl;
+//    }
     num_joints = joint_names.size();
     joint_position.resize(num_joints);
     joint_velocity.resize(num_joints);
@@ -87,7 +91,7 @@ int RosControlUdp::read() {
             joint_position[5] = udp_frame_recv.sJointPosAct[5];
             joint_position[6] = udp_frame_recv.sJointPosAct[6];
             joint_position[7] = udp_frame_recv.sJointPosAct[6];
-            joint_position[8] = udp_frame_recv.sJointPosAct[6];
+//            joint_position[8] = udp_frame_recv.sJointPosAct[6];
 //            gripper pose
 //            gripper_pose.position.x = udp_frame_recv.sEEPosAct[0];
 //            gripper_pose.position.y = udp_frame_recv.sEEPosAct[1];
@@ -220,13 +224,13 @@ void RosControlUdp::write() {
     }
 //     display sended values
 //    for (int k = 0; k < kArmNumberOfJoints; ++k) {
-//        std::cout << "J[" << k + 1 << "]: " << udp_frame_send.sJointPosDem[k] << " ";
+//        std::cout << "J[" << k + 1 << "]: " << udp_frame_recv.sJointPosAct[k] << " ";
 //    }
 //    std::cout << std::endl;
 
 //    std::cout << " Pos x :" << udp_frame_recv.sEEPosAct[0] << ", pos y :"
 //              << udp_frame_recv.sEEPosAct[1]
-//              << ", pos z: " << udp_frame_recv.sEEPosAct[2] << ", orien x: "
+//              << ", pos z: " << udp_frame_recv.sEEPosAct[2] << std::endl <<  ", orien x: "
 //              << udp_frame_recv.sEEQuatAct[0]
 //              << ", orien y: " << udp_frame_recv.sEEQuatAct[1] << ", orien, z: "
 //              << udp_frame_recv.sEEQuatAct[2] << ", orien w: "
@@ -245,6 +249,22 @@ void RosControlUdp::armModeCallback(const std_msgs::UInt8::ConstPtr &msg) {
 //        if read status is ok, try to switch arm in demand control mode (value from incoming topic)
         if (internal_status == 0) {
             udp_frame_send.sControlModeDem = msg->data;
+
+            if (msg->data == 50) {
+                for (int j = 0; j < 7; ++j) {
+                    udp_frame_send.sJointPosDem[j] = udp_frame_recv.sJointPosAct[j];
+                }
+            } else if (msg->data == 100) {
+                udp_frame_send.sCartesianEEPositionDEM[0] = udp_frame_recv.sEEPosAct[0];
+                udp_frame_send.sCartesianEEPositionDEM[1] = udp_frame_recv.sEEPosAct[1];
+                udp_frame_send.sCartesianEEPositionDEM[2] = udp_frame_recv.sEEPosAct[2];
+                udp_frame_send.sCartesianEEQuaternionDEM[0] = udp_frame_recv.sEEQuatAct[0];
+                udp_frame_send.sCartesianEEQuaternionDEM[1] = udp_frame_recv.sEEQuatAct[1];
+                udp_frame_send.sCartesianEEQuaternionDEM[2] = udp_frame_recv.sEEQuatAct[2];
+                udp_frame_send.sCartesianEEQuaternionDEM[3] = udp_frame_recv.sEEQuatAct[3];
+                udp_frame_send.sGripperPositionDEM = udp_frame_recv.sGripperPosAct;
+                udp_frame_send.sJointPosDem[6] = udp_frame_recv.sJointPosAct[6];
+            }
 
             udpSocket.CRC32_calculate(&udp_frame_send.data_bytes, sizeof(udp_frame_send.data_bytes), &crc_value);
             udp_frame_send.CRC = crc_value;
@@ -278,9 +298,9 @@ void RosControlUdp::cartessianPoseCallback(const visualization_msgs::Interactive
 //                  << msg->poses[0].pose.orientation.y << " orien z:" << msg->poses[0].pose.orientation.z << " orien w:"
 //                  << msg->poses[0].pose.orientation.w << std::endl;
 //        set actual joint positions
-        for (int j = 0; j < kArmNumberOfJoints; ++j) {
-            udp_frame_send.sJointPosDem[j] = udp_frame_recv.sJointPosAct[j];
-        }
+//        for (int j = 0; j < kArmNumberOfJoints; ++j) {
+//            udp_frame_send.sJointPosDem[j] = udp_frame_recv.sJointPosAct[j];
+//        }
 
         uint32_t crc_value;
         udpSocket.CRC32_calculate(&udp_frame_send.data_bytes, sizeof(udp_frame_send.data_bytes), &crc_value);

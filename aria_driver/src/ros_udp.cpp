@@ -17,12 +17,12 @@ RosUdp::~RosUdp() {
 void RosUdp::rosInit() {
 //    Loading ROS parameters
     nh_private.param("/port_in", port_in, 7777);
-    nh_private.param("port_out", port_out, 7777);
+    nh_private.param("/port_out", port_out, 7777);
     nh_private.param<std::string>("/remote_ip", remote_ip, "192.168.9.9");
 
 //    Init ROS publishers,
     arm_status_pub = nh.advertise<std_msgs::UInt8>("out/arm_status", 10);
-    arm_fault_code_pub = nh.advertise<std_msgs::UInt8>("out/arm_fault_code", 10);
+    arm_fault_code_pub = nh.advertise<std_msgs::UInt16>("out/arm_fault_code", 10);
     joint_mode_pub = nh.advertise<std_msgs::UInt8MultiArray>("out/joint_mode", 10);
     joint_fault_code_pub = nh.advertise<std_msgs::UInt16MultiArray>("out/joint_fault_code", 10);
     joint_state_pub = nh.advertise<sensor_msgs::JointState>("out/joint_states", 10);
@@ -198,6 +198,22 @@ void RosUdp::armModeCallback(const std_msgs::UInt8::ConstPtr &msg) {
         status = readData();
         if (status == 0) {
             udp_frame_send.sControlModeDem = msg->data;
+            if (msg->data == 50) {
+                for (int j = 0; j < 7; ++j) {
+                    udp_frame_send.sJointPosDem[j] = udp_frame_recv.sJointPosAct[j];
+                }
+            } else if (msg->data == 100){
+                udp_frame_send.sCartesianEEPositionDEM[0] = udp_frame_recv.sEEPosAct[0];
+                udp_frame_send.sCartesianEEPositionDEM[1] = udp_frame_recv.sEEPosAct[1];
+                udp_frame_send.sCartesianEEPositionDEM[2] = udp_frame_recv.sEEPosAct[2];
+                udp_frame_send.sCartesianEEQuaternionDEM[0] = udp_frame_recv.sEEQuatAct[0];
+                udp_frame_send.sCartesianEEQuaternionDEM[1] = udp_frame_recv.sEEQuatAct[1];
+                udp_frame_send.sCartesianEEQuaternionDEM[2] = udp_frame_recv.sEEQuatAct[2];
+                udp_frame_send.sCartesianEEQuaternionDEM[3] = udp_frame_recv.sEEQuatAct[3];
+                udp_frame_send.sGripperPositionDEM = udp_frame_recv.sGripperPosAct;
+                udp_frame_send.sJointPosDem[6] = udp_frame_recv.sJointPosAct[6];
+//                std::cout << udp_frame_send.sGripperPositionDEM << std::endl;
+            }
             writeData();
             status = readData();
         }

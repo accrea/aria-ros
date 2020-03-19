@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="aria_v1_arm">
+
+  <xacro:include filename="$(find aria_description)/urdf/common.gazebo.xacro" />
+  <xacro:include filename="$(find aria_description)/urdf/aria_v1.urdf" />
+  <xacro:include filename="$(find aria_description)/urdf/aria_v1_transmission.xacro" /> 
+
+  <xacro:aria_v1_transmission />
+
+  <!-- Mimic joint - gripper finger 2 -->
+  <gazebo>
+    <plugin name="finger_2_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+      <joint>FJoint1</joint>
+      <mimicJoint>FJoint2</mimicJoint>
+    </plugin>
+  </gazebo>
+
+  <link name="world" />
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link="base_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+</robot>

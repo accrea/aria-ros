@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="aria_v1_arm">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.006867 -2.3306E-07 0.1029"
+        rpy="0 0 0" />
+      <mass
+        value="0.47699" />
+      <inertia
+        ixx="0.0020506"
+        ixy="-5.4171E-09"
+        ixz="4.8967E-05"
+        iyy="0.0019633"
+        iyz="-3.9639E-09"
+        izz="0.00092302" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="C2">
+    <inertial>
+      <origin
+        xyz="2.2289E-05 0.0028789 0.062568"
+        rpy="0 0 0" />
+      <mass
+        value="1.0147" />
+      <inertia
+        ixx="0.00073312"
+        ixy="4.4325E-06"
+        ixz="9.5766E-08"
+        iyy="0.00097269"
+        iyz="-5.7984E-05"
+        izz="0.0008251" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint1"
+    type="continuous">
+    <origin
+      xyz="0 0 0.19525"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="C2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0.65" />
+  </joint>
+  <link
+    name="C3">
+    <inertial>
+      <origin
+        xyz="0.18466 -0.010126 -5.2395E-05"
+        rpy="0 0 0" />
+      <mass
+        value="1.5407" />
+      <inertia
+        ixx="0.00083279"
+        ixy="5.108E-06"
+        ixz="-7.3577E-06"
+        iyy="0.006788"
+        iyz="2.1922E-07"
+        izz="0.0060612" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint2"
+    type="revolute">
+    <origin
+      xyz="0 -0.00388 0.11075"
+      rpy="0 0 0" />
+    <parent
+      link="C2" />
+    <child
+      link="C3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-0.835"
+      upper="3.95"
+      effort="0"
+      velocity="0.9" />
+  </joint>
+  <link
+    name="C4">
+    <inertial>
+      <origin
+        xyz="0.034236 0.012228 7.5617E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.75713" />
+      <inertia
+        ixx="0.00044157"
+        ixy="2.5585E-05"
+        ixz="1.9108E-07"
+        iyy="0.00069308"
+        iyz="-5.9144E-08"
+        izz="0.00046476" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint3"
+    type="revolute">
+    <origin
+      xyz="0.41 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="C3" />
+    <child
+      link="C4" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.2"
+      upper="3.05"
+      effort="0"
+      velocity="0.65" />
+  </joint>
+  <link
+    name="C5">
+    <inertial>
+      <origin
+        xyz="0.10106 -0.005985 -0.020987"
+        rpy="0 0 0" />
+      <mass
+        value="0.7629" />
+      <inertia
+        ixx="0.00041645"
+        ixy="0.00013109"
+        ixz="0.00025831"
+        iyy="0.0013087"
+        iyz="-3.328E-05"
+        izz="0.0011753" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint4"
+    type="continuous">
+    <origin
+      xyz="0.10025 0.01688 0"
+      rpy="0 0 0" />
+    <parent
+      link="C4" />
+    <child
+      link="C5" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="1.1" />
+  </joint>
+  <link
+    name="C6">
+    <inertial>
+      <origin
+        xyz="0.026025 0.0061549 0.027469"
+        rpy="0 0 0" />
+      <mass
+        value="0.65716" />
+      <inertia
+        ixx="0.00035354"
+        ixy="2.0268E-05"
+        ixz="-3.9013E-05"
+        iyy="0.00037446"
+        iyz="3.5456E-05"
+        izz="0.00024204" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/C6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint5"
+    type="revolute">
+    <origin
+      xyz="0.21628 0.00071 -0.05025"
+      rpy="0 0 0" />
+    <parent
+      link="C5" />
+    <child
+      link="C6" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.3"
+      upper="1.35"
+      effort="0"
+      velocity="1.1" />
+  </joint>
+  <link
+    name="Gripper">
+    <inertial>
+      <origin
+        xyz="0.044477 -0.0019357 -0.00061691"
+        rpy="0 0 0" />
+      <mass
+        value="0.79039" />
+      <inertia
+        ixx="0.00043881"
+        ixy="-2.067E-06"
+        ixz="-1.4097E-06"
+        iyy="0.00029456"
+        iyz="3.0944E-07"
+        izz="0.00027978" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/Gripper.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/Gripper.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint6"
+    type="continuous">
+    <origin
+      xyz="0.065533 0.0012125 0.0603"
+      rpy="0 0 0" />
+    <parent
+      link="C6" />
+    <child
+      link="Gripper" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="1.1" />
+  </joint>
+  <link
+    name="Finger1+2">
+    <inertial>
+      <origin
+        xyz="0.039295 -0.013949 0.010239"
+        rpy="0 0 0" />
+      <mass
+        value="0.055822" />
+      <inertia
+        ixx="5.8667E-06"
+        ixy="2.5984E-11"
+        ixz="-2.6997E-06"
+        iyy="1.1887E-05"
+        iyz="4.1196E-11"
+        izz="1.1059E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/Finger1+2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/Finger1+2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FJoint1"
+    type="revolute">
+    <origin
+      xyz="0.10705 0.0139 -0.031"
+      rpy="0 0 0" />
+    <parent
+      link="Gripper" />
+    <child
+      link="Finger1+2" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="1.05"
+      effort="0"
+      velocity="1" />
+  </joint>
+  <link
+    name="Finger3">
+    <inertial>
+      <origin
+        xyz="0.039161 -5.0112E-09 -0.010511"
+        rpy="0 0 0" />
+      <mass
+        value="0.027789" />
+      <inertia
+        ixx="2.9896E-06"
+        ixy="-1.0187E-12"
+        ixz="1.4306E-06"
+        iyy="5.9874E-06"
+        iyz="5.456E-12"
+        izz="5.4662E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/Finger3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aria_description/meshes/aria_v1/Finger3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FJoint2"
+    type="revolute">
+    <origin
+      xyz="0.10705 0 0.031"
+      rpy="0 0 0" />
+    <parent
+      link="Gripper" />
+    <child
+      link="Finger3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="0"
+      upper="1.05"
+      effort="0"
+      velocity="1" />
+    <mimic joint="FJoint1" multiplier="1" offset="0"/>
+  </joint>
+  <link name="eef_link" />
+  <joint name="eef_joint" type="fixed">
+    <parent link="Gripper" />
+    <child link="eef_link" />
+    <origin xyz="0.1555 0 0" rpy="3.1415 -1.5708 0" />
+  </joint>
+</robot>

@@ -12,7 +12,6 @@
 int main(int argc, char *argv[]) {
 //    ROS init
     ros::init(argc, argv, "demo_pick_and_place");
-    ros::NodeHandle nh;
     ros::AsyncSpinner spinner(4);
     spinner.start();
 
@@ -28,7 +27,7 @@ int main(int argc, char *argv[]) {
     ros::Duration(1.0).sleep();
     andPlace.placeOnTable2(group_arm); //place object
     ros::Duration(1.0).sleep();
-    //andPlace.pickFromTable2(group_arm);
+//    andPlace.pickFromTable2(group_arm);
     return 0;
 }
 
@@ -36,6 +35,7 @@ PickAndPlace::PickAndPlace() {
     collision_objects.resize(3); // 4 objects (2 tables, 1 object to replace and floor)
 //    planning_scene_interface = new (moveit::planning_interface::PlanningSceneInterface);
     addCollisionObjects(planning_scene_interface); // add objects in arm workspace
+    nh.param<std::string>("/arm_type", arm_type, "aria_v2");
     std::cout << "object spawned";
 }
 
@@ -115,7 +115,10 @@ void PickAndPlace::addCollisionObjects(moveit::planning_interface::PlanningScene
 void PickAndPlace::openGripper(trajectory_msgs::JointTrajectory &gripper_joint_trajectory) {
 //    resize joint names vector and set name
     gripper_joint_trajectory.joint_names.resize(1);
-    gripper_joint_trajectory.joint_names[0] = "finger_joint_1";
+    if (arm_type == "aria_v2")
+        gripper_joint_trajectory.joint_names[0] = "finger_joint_1";
+    else if (arm_type == "aria_v1")
+        gripper_joint_trajectory.joint_names[0] = "FJoint1";
 
 //    resize points and position vectors, set values
     gripper_joint_trajectory.points.resize(1);
@@ -129,7 +132,10 @@ void PickAndPlace::openGripper(trajectory_msgs::JointTrajectory &gripper_joint_t
 void PickAndPlace::closeGripper(trajectory_msgs::JointTrajectory &gripper_joint_trajectory) {
 //    resize joint names vector and set name
     gripper_joint_trajectory.joint_names.resize(1);
-    gripper_joint_trajectory.joint_names[0] = "finger_joint_1";
+    if (arm_type == "aria_v2")
+        gripper_joint_trajectory.joint_names[0] = "finger_joint_1";
+    else if (arm_type == "aria_v1")
+        gripper_joint_trajectory.joint_names[0] = "FJoint1";
 
 //    resize points and position vectors, set values
     gripper_joint_trajectory.points.resize(1);

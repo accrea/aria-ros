@@ -8,7 +8,7 @@
     <rosparam file="$(find aria_startup)/config/connection_config.yaml" command="load"/>
     <rosparam file="$(find aria_description)/config/$(arg arm_type)_joint_names.yaml" command="load"/>
     <param name="robot_description"
-           command="$(find xacro)/xacro '$(find aria_description)/urdf/$(arg arm_type).urdf.xacro' "/>
+           command="$(find xacro)/xacro.py '$(find aria_description)/urdf/$(arg arm_type).urdf.xacro' "/>
 
     <!--    if don't use ros control, control arm by incoming ROS topics-->
     <group unless="$(arg use_ros_control)">
@@ -34,10 +34,10 @@
         </group>
     </group>
 
-    <!-- load joint state publisher-->
+    <!-- load joint state publisher
     <node name="$(arg arm_type)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    </node>
+    </node> -->
 
-    <!--    load robot state publisher-->
+    <!--    load robot state publisher  -->
     <node name="$(arg arm_type)_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 </launch>

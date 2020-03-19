@@ -1,17 +1,3 @@
-<!--
-/*******************************************************
- * Copyright (C) 2020 ACCREA <accrea@accrea.com>
- * 
- * Author: ACCREA
- *
- * This file is part of aria-ros repository.
- * 
- * aria-ros repository can not be distributed without the express
- * permission of ACCREA
- *
- *******************************************************/
--->
-
 <launch>
 
   # The planning and execution components of MoveIt! configured to 

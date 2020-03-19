@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: aria_description
+    relative_path: urdf/aria_v1.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/aria_v1_arm.srdf
+  CONFIG:
+    author_name: Piotr Jagiełło
+    author_email: p.jagiello@accrea.com
+    generated_timestamp: 1582797150

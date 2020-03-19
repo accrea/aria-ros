@@ -22,12 +22,13 @@ int main(int argc, char *argv[]) {
     ros::AsyncSpinner spinner(1);
     spinner.start();
 
-//    ros::Time prev_time = ros::Time::now();
+    ros::Time prev_time = ros::Time::now();
     ros::Rate loop_rate(LOOP_HZ);
 
     while (rosControlUdp.nh.ok()) {
         const ros::Time time = ros::Time::now();
-        const ros::Duration period(0.1);
+        const ros::Duration period = time - prev_time;
+//        const ros::Duration period(0.1);
 
         rosControlUdp.write();
         controllerManager.update(time, period);

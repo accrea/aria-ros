@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: aria_driver
+Description: Description of aria_driver
+Version: 0.0.1
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 
