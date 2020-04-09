@@ -2,9 +2,9 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="aria_v2_arm">
 
-  <xacro:include filename="$(find aria_v2_description)/urdf/common.gazebo.xacro" />
-  <xacro:include filename="$(find aria_v2_description)/urdf/aria_v2.urdf" />
-  <xacro:include filename="$(find aria_v2_description)/urdf/aria_v2_transmission.xacro" />
+  <xacro:include filename="$(find aria_description)/urdf/common.gazebo.xacro" />
+  <xacro:include filename="$(find aria_description)/urdf/aria_v2.urdf" />
+  <xacro:include filename="$(find aria_description)/urdf/aria_v2_transmission.xacro" />
 
   <xacro:aria_v2_transmission />
 
