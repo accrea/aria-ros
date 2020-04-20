@@ -1,8 +1,0 @@
-prefix=/home/accrea/aria_workspace/src/aria_driver/cmake-build-debug/devel
-
-Name: aria_driver
-Description: Description of aria_driver
-Version: 0.0.1
-Cflags: -I/home/accrea/aria_workspace/src/aria_driver/include
-Libs: -L${prefix}/lib 
-Requires: 

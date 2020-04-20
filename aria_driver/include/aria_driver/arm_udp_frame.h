@@ -28,7 +28,7 @@ typedef struct __attribute__((__packed__))
             float sCartesianEEQuaternionDEM[4];
             float sGripperPositionDEM;
         };
-        uint8_t data_bytes[25];
+        uint8_t data_bytes[117];
     };
     uint32_t CRC;
 }
@@ -52,7 +52,7 @@ typedef struct __attribute__((__packed__))
             float sEEQuatAct[4];
             float sGripperPosAct;
         };
-        uint8_t data_bytes[30];
+        uint8_t data_bytes[140];
     };
     uint32_t CRC;
 }

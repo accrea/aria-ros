@@ -1,8 +1,0 @@
-prefix=/home/accrea/aria_workspace/src/aria_description/cmake-build-debug/devel
-
-Name: aria_description
-Description: Description of aria_description
-Version: 0.0.1
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
