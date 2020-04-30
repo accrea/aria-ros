@@ -36,7 +36,7 @@ cd ~/path_to_your_workspace
 catkin_make
 ```
 
-Also, make sure you have installed `ros-control`, `controller-manager` and `Moveit` (if not, run in terminal `sudo apt-get install ros-melodic-ros-control`, `sudo apt-get install ros-melodic-ros-controller-manager` and `sudo apt-get install ros-melodic-moveit*`).
+Also, make sure you have installed `ros-control`, `controller-manager` and `Moveit` (if not, run in terminal `sudo apt-get install ros-melodic-ros-control`, `sudo apt-get install ros-melodic-controller-manager` and `sudo apt-get install ros-melodic-moveit*`).
 
 # How to use
 
