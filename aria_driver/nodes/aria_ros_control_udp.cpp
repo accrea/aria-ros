@@ -1,23 +1,17 @@
-/**************************************************
- *
- * Copyright (C) ACCREA 2020, All rights reserved
- * Authors: Piotr Jagiełło, Damian Muszyński
- * email: p.jagiello@accrea.com, d.muszynski@accrea.com
- * website: engineering.accrea.com
- *
- *************************************************/
+//
+// Created by accrea on 4/28/20.
+//
 
 #include "aria_driver/ros_control_udp.h"
 #include <controller_manager/controller_manager.h>
 
-
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv){
     const int LOOP_HZ = 100;
 
     ros::init(argc, argv, "ros_control_udp");
 
-    RosControlUdp rosControlUdp;
-    controller_manager::ControllerManager controllerManager(&rosControlUdp);
+    RosControlUDP rosControlUDP;
+    controller_manager::ControllerManager controllerManager(&rosControlUDP);
 
     ros::AsyncSpinner spinner(1);
     spinner.start();
@@ -25,17 +19,21 @@ int main(int argc, char *argv[]) {
     ros::Time prev_time = ros::Time::now();
     ros::Rate loop_rate(LOOP_HZ);
 
-    while (rosControlUdp.nh.ok()) {
+
+
+    while(rosControlUDP.nh_.ok()){
         const ros::Time time = ros::Time::now();
         const ros::Duration period = time - prev_time;
-//        const ros::Duration period(0.1);
-
-        rosControlUdp.write();
-        controllerManager.update(time, period);
-        rosControlUdp.read();
-
+        if (AriaClient_isConnected() > 0){
+            rosControlUDP.write();
+            controllerManager.update(time, period);
+            rosControlUDP.read();
+        }
+        ros::spinOnce();
         loop_rate.sleep();
     }
+
+    AriaClient_StopCommunication();
 
     return 0;
 }

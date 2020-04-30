@@ -7,28 +7,27 @@
  *
  *************************************************/
 
-#include "aria_driver/ros_udp.h"
+#include <aria_driver/ros_udp.h>
 
 int main(int argc, char **argv) {
     const int LOOP_RATE = 100;
 
-    ros::init(argc, argv, "aria_v2_driver");
-    RosUdp ros_udp;
+    ros::init(argc, argv, "ros_udp");
+    RosUDP ros_udp;
 //    ros::start();
     ros::Rate loop_rate(LOOP_RATE);
 
-    ros_udp.rosInit();
-    ros_udp.udpInit();
+//    AriaClient_StartCommunication();
 
-    if (ros_udp.armInit()) {
-        ROS_INFO("ARM INIT COMPLETE");
-        while (ros_udp.nh.ok()) {
-            ros_udp.writeData();
-            ros_udp.readData();
-            ros::spinOnce();
-            loop_rate.sleep();
+    while (ros_udp.nh_.ok()) {
+        if (AriaClient_isConnected() > 0) {
+            ros_udp.getAndPublishData();
         }
-    } else ROS_ERROR("Aria arm init failed");
+        ros::spinOnce();
+        loop_rate.sleep();
+    }
+
+    AriaClient_StopCommunication();
 
     return 0;
 }

@@ -1,18 +1,11 @@
-/**************************************************
- *
- * Copyright (C) ACCREA 2020, All rights reserved
- * Authors: Piotr Jagiełło, Damian Muszyński
- * email: p.jagiello@accrea.com, d.muszynski@accrea.com
- * website: engineering.accrea.com
- *
- *************************************************/
+//
+// Created by accrea on 4/28/20.
+//
 
-#ifndef ARIA_V2_ROS_UDP_ROS_CONTROL_UDP_H
-#define ARIA_V2_ROS_UDP_ROS_CONTROL_UDP_H
+#ifndef ARIA_DRIVER_ROS_CONTROL_UDP_H
+#define ARIA_DRIVER_ROS_CONTROL_UDP_H
 
 #include "ros/ros.h"
-#include "udp_socket.h"
-#include "arm_udp_frame.h"
 #include <hardware_interface/robot_hw.h>
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/joint_command_interface.h>
@@ -21,41 +14,42 @@
 #include <std_msgs/UInt8.h>
 #include <visualization_msgs/InteractiveMarkerUpdate.h>
 
-class RosControlUdp : public hardware_interface::RobotHW {
+#include "AriaClient.h"
+
+class RosControlUDP : public hardware_interface::RobotHW {
 public:
-    RosControlUdp();
+    RosControlUDP();
 
-    ~RosControlUdp();
+    ~RosControlUDP();
 
-    int read(); // read data from hardware
+    void read();
 
-    void write(); // send data to hardware
+    void write();
 
-    ros::NodeHandle nh; // class NodeHandler
+    void connectionInit();
 
-    ros::Subscriber arm_mode_sub; // ROS subscriber to change arm mode
-    ros::Subscriber cartessian_pose_sub; // ROS callback, allow to control arm in cartessian mode
+    ros::NodeHandle nh_; // class NodeHandler
+
+    ros::Subscriber arm_mode_sub_; // ROS subscriber to change arm mode
+    ros::Subscriber cartessian_pose_sub_; // ROS callback, allow to control arm in cartessian mode
+
+    int connection_status_;
 private:
-//      ROS hardware interfaces
-    hardware_interface::JointStateInterface joint_state_interface;
-    hardware_interface::PositionJointInterface position_joint_interface;
+//    ROS hardware interfaces
+    hardware_interface::JointStateInterface joint_state_interface_;
+    hardware_interface::PositionJointInterface position_joint_interface_;
 
-    int num_joints, frame_count;
-    std::vector<std::string> joint_names; // joint names vector
-    std::vector<double> joint_position, joint_velocity, joint_effort, joint_position_command;
-    geometry_msgs::Pose gripper_pose;
-    bool arm_init;
-
-//    UDP connection variables
-    UDPSocket udpSocket;
-    int port_in, port_out;
-    std::string remote_ip;
-    arm_udp_frame_send_t udp_frame_send;
-    arm_udp_frame_recv_t udp_frame_recv;
-
-//      ROS callbacks
+//    ROS callbacks
     void armModeCallback(const std_msgs::UInt8::ConstPtr &msg);
+
     void cartessianPoseCallback(const visualization_msgs::InteractiveMarkerUpdate::ConstPtr &msg);
+
+    int num_joints_, frame_count_;
+    float EEPosAct_[3], EEQuatAct_[4];
+    float EEPosDem_[3], EEQuatDem_[4];
+    std::vector<std::string> joint_names_; // joint names vector
+    std::vector<double> joint_position_, joint_velocity_, joint_effort_, joint_position_command_;
+    bool arm_init_;
 };
 
-#endif //ARIA_V2_ROS_UDP_ROS_CONTROL_UDP_H
+#endif //ARIA_DRIVER_ROS_CONTROL_UDP_H
