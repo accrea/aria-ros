@@ -11,13 +11,13 @@
     <group if="$(eval arg('arm_type') =='aria_v2')">
         <node name="$(arg arm_type)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
             <param name="use_gui" value="$(arg gui)"/>
-            <param name="zeros/arm_joint_1" value="0.014"/>
-            <param name="zeros/arm_joint_2" value="1.587"/>
-            <param name="zeros/arm_joint_3" value="-2.54"/>
-            <param name="zeros/arm_joint_4" value="2.471"/>
-            <param name="zeros/arm_joint_5" value="-1.036"/>
-            <param name="zeros/arm_joint_6" value="1.9"/>
-            <param name="zeros/finger_joint_1" value="0"/>
+            <param name="zeros/Joint_1" value="0.014"/>
+            <param name="zeros/Joint_2" value="1.587"/>
+            <param name="zeros/Joint_3" value="-2.54"/>
+            <param name="zeros/Joint_4" value="2.471"/>
+            <param name="zeros/Joint_5" value="-1.036"/>
+            <param name="zeros/Joint_6" value="1.9"/>
+            <param name="zeros/Joint_7" value="0"/>
         </node>
     </group>
 

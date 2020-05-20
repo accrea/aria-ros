@@ -4,7 +4,7 @@
 
     <transmission name="arm_trans_1">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="arm_joint_1">
+      <joint name="Joint_1">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="arm_motor_1">
@@ -14,7 +14,7 @@
 
     <transmission name="arm_trans_2">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="arm_joint_2">
+      <joint name="Joint_2">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="arm_motor_2">
@@ -24,7 +24,7 @@
 
     <transmission name="arm_trans_3">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="arm_joint_3">
+      <joint name="Joint_3">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="arm_motor_3">
@@ -34,7 +34,7 @@
 
     <transmission name="arm_trans_4">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="arm_joint_4">
+      <joint name="Joint_4">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="arm_motor_4">
@@ -44,7 +44,7 @@
 
     <transmission name="arm_trans_5">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="arm_joint_5">
+      <joint name="Joint_5">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="arm_motor_5">
@@ -54,7 +54,7 @@
 
     <transmission name="arm_trans_6">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="arm_joint_6">
+      <joint name="Joint_6">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="arm_motor_6">
@@ -64,7 +64,7 @@
 
     <transmission name="finger_trans_1">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="finger_joint_1">
+      <joint name="Joint_7">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="gripper_motor">
@@ -74,23 +74,13 @@
 
     <transmission name="finger_trans_2">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="finger_joint_2">
+      <joint name="Joint_8">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="gripper_motor">
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
-
-   <transmission name="finger_trans_3">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="finger_joint_3">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="gripper_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission> 
 
   </xacro:macro>
 </robot>

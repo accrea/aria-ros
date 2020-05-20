@@ -1,11 +1,11 @@
 moveit_setup_assistant_config:
   URDF:
-    package: aria_v2_description
+    package: aria_description
     relative_path: urdf/aria_v2.urdf.xacro
     xacro_args: ""
   SRDF:
     relative_path: config/aria_v2_arm.srdf
   CONFIG:
-    author_name: Accrea 2020
-    author_email: email@email.com
-    generated_timestamp: 1581063175
+    author_name: Piotr Jagiełło
+    author_email: p.jagiello@accrea.com
+    generated_timestamp: 1589795387
