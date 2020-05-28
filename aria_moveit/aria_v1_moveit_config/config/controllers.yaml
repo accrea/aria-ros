@@ -5,17 +5,17 @@ controller_list:
     type: FollowJointTrajectory
     default: true
     joints:
-       - Joint1
-       - Joint2
-       - Joint3
-       - Joint4
-       - Joint5
-       - Joint6
+       - Joint_1
+       - Joint_2
+       - Joint_3
+       - Joint_4
+       - Joint_5
+       - Joint_6
   - name: gripper_controller
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     joints:
-      - FJoint1
+      - Joint_7
 #      - finger_joint_2
 #      - finger_joint_3
 

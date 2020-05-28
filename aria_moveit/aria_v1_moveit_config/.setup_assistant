@@ -8,4 +8,4 @@ moveit_setup_assistant_config:
   CONFIG:
     author_name: Piotr Jagiełło
     author_email: p.jagiello@accrea.com
-    generated_timestamp: 1582797150
+    generated_timestamp: 1590653101

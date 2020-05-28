@@ -11,15 +11,15 @@
   <!-- Mimic joint - gripper finger 2 -->
   <gazebo>
     <plugin name="finger_2_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
-      <joint>FJoint1</joint>
-      <mimicJoint>FJoint2</mimicJoint>
+      <joint>Joint_7</joint>
+      <mimicJoint>Joint_8</mimicJoint>
     </plugin>
   </gazebo>
 
   <link name="world" />
   <joint name="world_joint" type="fixed">
     <parent link="world" />
-    <child link="base_link" />
+    <child link="Link_0" />
     <origin xyz="0 0 0" rpy="0 0 0" />
   </joint>
 
