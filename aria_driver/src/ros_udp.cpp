@@ -103,6 +103,7 @@ int RosUDP::getAndPublishData() {
 void RosUDP::armModeCallback(const std_msgs::UInt8::ConstPtr &msg) {
     do {
         AriaClient_SetArmControlMode(msg->data);
+        AriaClient_WaitForMode(msg->data);
     } while (msg->data != AriaClient_GetArmStatus());
 }
 

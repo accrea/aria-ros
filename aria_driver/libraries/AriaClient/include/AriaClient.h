@@ -16,7 +16,11 @@ extern "C"
 
 #include <stdint.h>
 
-// Definicja struktur z danymi
+/**** Definicja struktur z danymi ***/
+// Po zadeklarowaniu struktur w kodzie nalezy je wypelnic zerami przed ich uzyciem!!!
+
+/* Struktura danych wysylanych do mastera ramienia
+ * Zadane parametry pracy ramienia */
 typedef struct __attribute__((__packed__))
 {
 	uint8_t ControlMode_DEM;
@@ -28,6 +32,8 @@ typedef struct __attribute__((__packed__))
 	float GripperPosition_DEM;
 } ARM_DATA_MISO;
 
+/* Struktura danych odbieranych od mastera ramienia
+ * Aktualne parametry pracy ramienia */
 typedef struct __attribute__((__packed__))
 {
 	uint8_t ULA_Status;
@@ -64,6 +70,9 @@ extern int AriaClient_Connect();
  * Czestotliwosc wymiany danych to 100Hz
  * W przypadku utraty polaczenia usluga przez 2 sekundy probuje
  * odnowic polaczenie, a jesli sie nie uda konczy prace
+ * Po poprawnym uruchomieniu ciaglej komunikacji nastepuje przepisanie
+ * aktualnych wartosci pozycji na wartosci zadane aby nie wystapily
+ * niepozadane ruchy
  *
  * Wartosci zwracane
  *   0 prawidlowe uruchomienie uslugi
@@ -107,9 +116,18 @@ extern uint8_t AriaClient_GetArmStatus();
 extern uint16_t AriaClient_GetArmFaultCode();
 
 /* Funkcja powodujaca zmiane trybu pracy ramienia
- * przed zmiana trybu aktualne wartosci sa przepisywane jako zadane
- * w celu ochrony przed niechcianymi przemieszczeniami */
+ */
 extern void AriaClient_SetArmControlMode(uint8_t controlMode);
+
+/* Funkcja oczekujaca na osiagniecie trybu pracy ramienia.
+ * Funkcja posiada timeout wynoszacy 2s.
+ * Uwaga! Ta funkcja nie zastepuje funkcji SetArmControlMode
+ * tzn nie zmienia wartosci zadanej.
+ *
+ * zwracane wartosci:
+ *  0 gdy ramie osiagnelo wymagany stan
+ * -1 gdy ramie nie osiagnelo wymaganego stanu */
+extern int AriaClient_WaitForMode(uint8_t controlMode);
 
 
 /*
@@ -161,11 +179,26 @@ extern float AriaClient_GetJointTrq(uint8_t jointNr);
 // Funkcja powodujaca zmiane wartosci zadanej pozycji wybranego modulu
 extern void AriaClient_SetJointPos(uint8_t jointNr, float position);
 
+/* Funkcja umozliwiajaca zmiane wartosci zadanej pozycji dla kilku modulow
+ * jako argumenty podajemy: liczbe modulow 1-7, wskaznik na tablice z nowymi wartosciami
+ */
+extern void AriaClient_SetJointsPos(uint8_t jointsCnt, float* position);
+
 // Funkcja powodujaca zmiane wartosci zadanej predkosci wybranego modulu
 extern void AriaClient_SetJointVel(uint8_t jointNr, float velocity);
 
+/* Funkcja umozliwiajaca zmiane wartosci zadanej predkosci dla kilku modulow
+ * jako argumenty podajemy: liczbe modulow 1-7, wskaznik na tablice z nowymi wartosciami
+ */
+extern void AriaClient_SetJointsVel(uint8_t jointsCnt, float* velocity);
+
 // Funkcja powodujaca zmiane wartosci zadanej generowanego momentu wybranego modulu
 extern void AriaClient_SetJointTrq(uint8_t jointNr, float torque);
+
+/* Funkcja umozliwiajaca zmiane wartosci zadanej generowanego momentu dla kilku modulow
+ * jako argumenty podajemy: liczbe modulow 1-7, wskaznik na tablice z nowymi wartosciami
+ */
+extern void AriaClient_SetJointsTrq(uint8_t jointsCnt, float* torque);
 
 
 /*
