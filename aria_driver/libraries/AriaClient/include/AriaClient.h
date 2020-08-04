@@ -161,22 +161,32 @@ extern void AriaClient_SetArmGripperPos(float position);
  * Funkcje w przestrzeni jointowej - dane z modulow
  */
 
-// Funkcja zwracajaca aktualny tryb pracy wybranego modulu
+/* Funkcja zwracajaca aktualny tryb pracy wybranego modulu
+ * jako argument podajemy numer modulu (1-7)
+ */
 extern uint8_t AriaClient_GetJointMode(uint8_t jointNr);
 
-// Funkcja zwracajaca aktualny kod bledu wybranego modulu
+/* Funkcja zwracajaca aktualny kod bledu wybranego modulu
+ * jako argument podajemy numer modulu (1-7)
+ */
 extern uint16_t AriaClient_GetJointFaultCode(uint8_t jointNr);
 
 // Funkcja zwracajaca aktualna pozycje wybranego modulu
 extern float AriaClient_GetJointPos(uint8_t jointNr);
 
-// Funkcja zwracajaca aktualna predkosc wybranego modulu
+/* Funkcja zwracajaca aktualna predkosc wybranego modulu
+ * jako argument podajemy numer modulu (1-7)
+ */
 extern float AriaClient_GetJointVel(uint8_t jointNr);
 
-// Funkcja zwracajaca aktualny moment generowny przez wybrany modul
+/* Funkcja zwracajaca aktualny moment generowny przez wybrany modul
+ * jako argument podajemy numer modulu (1-7)
+ */
 extern float AriaClient_GetJointTrq(uint8_t jointNr);
 
-// Funkcja powodujaca zmiane wartosci zadanej pozycji wybranego modulu
+/* Funkcja powodujaca zmiane wartosci zadanej pozycji wybranego modulu
+ * jako argumenty podajemy numer modulu (1-7) oraz wartosc jako float
+ */
 extern void AriaClient_SetJointPos(uint8_t jointNr, float position);
 
 /* Funkcja umozliwiajaca zmiane wartosci zadanej pozycji dla kilku modulow
@@ -184,7 +194,9 @@ extern void AriaClient_SetJointPos(uint8_t jointNr, float position);
  */
 extern void AriaClient_SetJointsPos(uint8_t jointsCnt, float* position);
 
-// Funkcja powodujaca zmiane wartosci zadanej predkosci wybranego modulu
+/* Funkcja powodujaca zmiane wartosci zadanej predkosci wybranego modulu
+ * jako argumenty podajemy numer modulu (1-7) oraz wartosc jako float
+ */
 extern void AriaClient_SetJointVel(uint8_t jointNr, float velocity);
 
 /* Funkcja umozliwiajaca zmiane wartosci zadanej predkosci dla kilku modulow
@@ -192,7 +204,9 @@ extern void AriaClient_SetJointVel(uint8_t jointNr, float velocity);
  */
 extern void AriaClient_SetJointsVel(uint8_t jointsCnt, float* velocity);
 
-// Funkcja powodujaca zmiane wartosci zadanej generowanego momentu wybranego modulu
+/* Funkcja powodujaca zmiane wartosci zadanej generowanego momentu wybranego modulu
+ * jako argumenty podajemy numer modulu (1-7) oraz wartosc jako float
+ */
 extern void AriaClient_SetJointTrq(uint8_t jointNr, float torque);
 
 /* Funkcja umozliwiajaca zmiane wartosci zadanej generowanego momentu dla kilku modulow

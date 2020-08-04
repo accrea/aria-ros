@@ -24,6 +24,7 @@
 #include <string>
 
 //UDP Aria Client
+
 #include "AriaClient.h"
 
 class RosUDP {
@@ -58,7 +59,7 @@ private:
     ros::Subscriber gripper_position_sub_; //gripper position
 
 //    ROS messages
-    std_msgs::UInt8 arm_status_msg_; //message to publish arm status
+    std_msgs::UInt8 arm_status_msg_; // message to publish arm status
     std_msgs::UInt16 arm_fault_code_msg_; // messgae to publish arm fault code
     std_msgs::UInt8MultiArray joint_mode_msg_; //message to publish joint modes
     std_msgs::UInt16MultiArray joint_fault_codes_msg_; //message to publish joint fault codes

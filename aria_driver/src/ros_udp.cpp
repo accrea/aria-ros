@@ -59,44 +59,46 @@ void RosUDP::connectionInit() {
 }
 
 int RosUDP::getAndPublishData() {
+    if (AriaClient_isConnected()) {
 //    get current time
-    joint_states_msg_.header.stamp = ros::Time::now();
-    for (int j = 0; j < 7; ++j) {
+        joint_states_msg_.header.stamp = ros::Time::now();
+        for (int j = 0; j < 7; ++j) {
 //        get actual joint pos, vel, anf eff
-        joint_states_msg_.position[j] = AriaClient_GetJointPos(j);
-        joint_states_msg_.velocity[j] = AriaClient_GetJointVel(j);
-        joint_states_msg_.effort[j] = AriaClient_GetJointTrq(j);
+            joint_states_msg_.position[j] = AriaClient_GetJointPos(j + 1);
+            joint_states_msg_.velocity[j] = AriaClient_GetJointVel(j + 1);
+            joint_states_msg_.effort[j] = AriaClient_GetJointTrq(j + 1);
 //        get joint modes
-        joint_mode_msg_.data[j] = AriaClient_GetJointMode(j);
+            joint_mode_msg_.data[j] = AriaClient_GetJointMode(j + 1);
 //        get fault codes
-        joint_fault_codes_msg_.data[j] = AriaClient_GetJointFaultCode(j);
-    }
+            joint_fault_codes_msg_.data[j] = AriaClient_GetJointFaultCode(j + 1);
+        }
 //    get arm status
-    arm_status_msg_.data = AriaClient_GetArmStatus();
+        arm_status_msg_.data = AriaClient_GetArmStatus();
 //    pobierz kod błędu ramienia
-    arm_fault_code_msg_.data = AriaClient_GetArmFaultCode();
+        arm_fault_code_msg_.data = AriaClient_GetArmFaultCode();
 //    end effector position
-    AriaClient_GetArmEEPosition(&EEPosAct_[0]);
-    end_effector_pose_msg_.position.x = EEPosAct_[0];
-    end_effector_pose_msg_.position.y = EEPosAct_[1];
-    end_effector_pose_msg_.position.z = EEPosAct_[2];
+        AriaClient_GetArmEEPosition(&EEPosAct_[0]);
+        end_effector_pose_msg_.position.x = EEPosAct_[0];
+        end_effector_pose_msg_.position.y = EEPosAct_[1];
+        end_effector_pose_msg_.position.z = EEPosAct_[2];
 //    end effector orientation
-    AriaClient_GetArmEEQuaternion(&EEQuatAct_[0]);
-    end_effector_pose_msg_.orientation.x = EEQuatAct_[0];
-    end_effector_pose_msg_.orientation.y = EEQuatAct_[1];
-    end_effector_pose_msg_.orientation.z = EEQuatAct_[2];
-    end_effector_pose_msg_.orientation.w = EEQuatAct_[3];
+        AriaClient_GetArmEEQuaternion(&EEQuatAct_[0]);
+        end_effector_pose_msg_.orientation.x = EEQuatAct_[0];
+        end_effector_pose_msg_.orientation.y = EEQuatAct_[1];
+        end_effector_pose_msg_.orientation.z = EEQuatAct_[2];
+        end_effector_pose_msg_.orientation.w = EEQuatAct_[3];
 //    end effector position
-    gripper_pos_msg_.data = AriaClient_GetArmGripperPos();
+        gripper_pos_msg_.data = AriaClient_GetArmGripperPos();
 
 //    publish messages
-    arm_status_pub_.publish(arm_status_msg_);
-    arm_fault_code_pub_.publish(arm_fault_code_msg_);
-    joint_mode_pub_.publish(joint_mode_msg_);
-    joint_fault_code_pub_.publish(joint_fault_codes_msg_);
-    joint_state_pub_.publish(joint_states_msg_);
-    end_effector_pose_pub_.publish(end_effector_pose_msg_);
-    gripper_pos_pub_.publish(gripper_pos_msg_);
+        arm_status_pub_.publish(arm_status_msg_);
+        arm_fault_code_pub_.publish(arm_fault_code_msg_);
+        joint_mode_pub_.publish(joint_mode_msg_);
+        joint_fault_code_pub_.publish(joint_fault_codes_msg_);
+        joint_state_pub_.publish(joint_states_msg_);
+        end_effector_pose_pub_.publish(end_effector_pose_msg_);
+        gripper_pos_pub_.publish(gripper_pos_msg_);
+    }
 }
 
 
@@ -113,7 +115,7 @@ void RosUDP::jointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg) {
         ROS_ERROR("Invalid number of position values in incoming ROS Message");
     else {
         for (int j = 0; j < 7; ++j) {
-            AriaClient_SetJointPos(j, msg->position[j]);
+            AriaClient_SetJointPos(j + 1, msg->position[j]);
         }
     }
 
@@ -122,7 +124,7 @@ void RosUDP::jointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg) {
         ROS_ERROR("Invalid number of velocity values in incoming ROS Message");
     else {
         for (int j = 0; j < 7; ++j) {
-            AriaClient_SetJointVel(j, msg->velocity[j]);
+            AriaClient_SetJointVel(j + 1, msg->velocity[j]);
         }
     }
 
@@ -131,7 +133,7 @@ void RosUDP::jointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg) {
         ROS_ERROR("Invalid number of effort values in incoming ROS Message");
     else {
         for (int j = 0; j < 7; ++j) {
-            AriaClient_SetJointTrq(j, msg->effort[j]);
+            AriaClient_SetJointTrq(j + 1, msg->effort[j]);
         }
     }
 }
