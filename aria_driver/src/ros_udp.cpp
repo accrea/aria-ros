@@ -103,10 +103,9 @@ int RosUDP::getAndPublishData() {
 
 
 void RosUDP::armModeCallback(const std_msgs::UInt8::ConstPtr &msg) {
-    do {
-        AriaClient_SetArmControlMode(msg->data);
-        AriaClient_WaitForMode(msg->data);
-    } while (msg->data != AriaClient_GetArmStatus());
+    AriaClient_SetArmControlMode(msg->data);
+    if(AriaClient_WaitForMode(msg->data)  < 0)
+        ROS_WARN("Ramię nie osiągnęło wymaganego stanu");
 }
 
 void RosUDP::jointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg) {
