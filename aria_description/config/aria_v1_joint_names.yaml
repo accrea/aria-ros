@@ -1,9 +1,8 @@
 joint_names:
-  - Joint1
-  - Joint2
-  - Joint3
-  - Joint4
-  - Joint5
-  - Joint6
-  - FJoint1
-  - FJoint2
+  - Joint_1
+  - Joint_2
+  - Joint_3
+  - Joint_4
+  - Joint_5
+  - Joint_6
+  - Joint_7

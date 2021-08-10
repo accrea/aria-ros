@@ -57,7 +57,7 @@ void RosControlUDP::connectionInit(){
 void RosControlUDP::read() {
     if (AriaClient_isConnected() > 0) {
         for (int j = 0; j < 7; ++j) {
-            joint_position_[j] = AriaClient_GetJointPos(j);
+            joint_position_[j] = AriaClient_GetJointPos(j + 1);
         }
         AriaClient_GetArmEEPosition(&EEPosAct_[0]);
         AriaClient_GetArmEEQuaternion(&EEQuatAct_[0]);
@@ -76,7 +76,7 @@ void RosControlUDP::write() {
     } else {
         if ((AriaClient_GetArmStatus() == 50) && (frame_count_ > 350)) {
             for (int j = 0; j < 7; ++j) {
-                AriaClient_SetJointPos(j, joint_position_command_[j]);
+                AriaClient_SetJointPos(j+1, joint_position_command_[j]);
             }
         }
         frame_count_++;
