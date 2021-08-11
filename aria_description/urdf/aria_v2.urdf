@@ -101,6 +101,7 @@
       upper="0"
       effort="0"
       velocity="0.7" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_2">
@@ -159,6 +160,7 @@
       upper="3.615"
       effort="0"
       velocity="0.7" />
+    <dynamics damping="0.43" friction="10.0"/>
   </joint>
   <link
     name="Link_3">
@@ -217,6 +219,7 @@
       upper="1.689"
       effort="0"
       velocity="0.7" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_4">
@@ -275,6 +278,7 @@
       upper="0"
       effort="0"
       velocity="1.1" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_5">
@@ -333,6 +337,7 @@
       upper="3.14"
       effort="0"
       velocity="1.1" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_6">
@@ -391,6 +396,7 @@
       upper="0"
       effort="0"
       velocity="1.1" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_7_Upper_finger">
@@ -449,6 +455,7 @@
       upper="1.05"
       effort="0"
       velocity="0.4" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_7_1">
@@ -502,6 +509,7 @@
       link="Link_7_1" />
     <axis
       xyz="0 0 0" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_7_2">
@@ -666,6 +674,7 @@
       upper="1.05"
       effort="0"
       velocity="0.4" />
+    <dynamics damping="0.13" friction="10.0"/>
     <mimic joint="Joint_7" multiplier="1" offset="0"/>
   </joint>
   <link
