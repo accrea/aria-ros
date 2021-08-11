@@ -16,7 +16,7 @@
     </node>
 
     <!--    load controllers -->
-    <rosparam file="$(find aria_driver)/config/$(arg arm_type)_controllers.yaml" command="load"/>
+    <rosparam file="$(find aria_gazebo)/config/$(arg arm_type)_controllers.yaml" command="load"/>
     <node name="$(arg arm_type)_controller_manager" pkg="controller_manager" type="spawner" output="screen"
           respawn="false"
           args="joint_state_controller arm_trajectory_controller gripper_controller"> 
