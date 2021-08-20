@@ -101,6 +101,7 @@
       upper="0"
       effort="0"
       velocity="0.7" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_2">
@@ -159,6 +160,7 @@
       upper="3.95"
       effort="0"
       velocity="0.9" />
+    <dynamics damping="0.43" friction="10.0"/>
   </joint>
   <link
     name="Link_3">
@@ -217,6 +219,7 @@
       upper="3.06"
       effort="0"
       velocity="0.7" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_4">
@@ -275,6 +278,7 @@
       upper="0"
       effort="0"
       velocity="1.1" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_5">
@@ -333,6 +337,7 @@
       upper="1.35"
       effort="0"
       velocity="1.1" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_6">
@@ -391,6 +396,7 @@
       upper="0"
       effort="0"
       velocity="1.1" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_7(Finger)">
@@ -449,6 +455,7 @@
       upper="1.06"
       effort="0"
       velocity="0.8" />
+    <dynamics damping="0.13" friction="10.0"/>
   </joint>
   <link
     name="Link_8(Finders)">
@@ -507,6 +514,7 @@
       upper="1.06"
       effort="0"
       velocity="0.8" />
+    <dynamics damping="0.13" friction="10.0"/>
     <mimic joint="Joint_7" multiplier="1" offset="0"/>
   </joint>
   <link
