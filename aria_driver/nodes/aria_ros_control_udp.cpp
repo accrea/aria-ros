@@ -13,7 +13,7 @@ int main(int argc, char **argv){
     RosControlUDP rosControlUDP;
     controller_manager::ControllerManager controllerManager(&rosControlUDP);
 
-    ros::AsyncSpinner spinner(1);
+    ros::AsyncSpinner spinner(2);
     spinner.start();
 
     ros::Time prev_time = ros::Time::now();
