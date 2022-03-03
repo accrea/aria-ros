@@ -42,7 +42,7 @@ PickAndPlace::PickAndPlace() {
 void PickAndPlace::addCollisionObjects(moveit::planning_interface::PlanningSceneInterface &planning_scene_interface) {
 //    definition of 1st table
     collision_objects[0].id = "table_1";
-    collision_objects[0].header.frame_id = "base_link";
+    collision_objects[0].header.frame_id = "Link_0";
     collision_objects[0].primitives.resize(1);
     collision_objects[0].primitives[0].type = collision_objects[0].primitives[0].BOX;
     collision_objects[0].primitives[0].dimensions.resize(3);
@@ -59,7 +59,7 @@ void PickAndPlace::addCollisionObjects(moveit::planning_interface::PlanningScene
 
 //    definition of 2nd table
     collision_objects[1].id = "table_2";
-    collision_objects[1].header.frame_id = "base_link";
+    collision_objects[1].header.frame_id = "Link_0";
     collision_objects[1].primitives.resize(1);
     collision_objects[1].primitives[0].type = collision_objects[1].primitives[0].BOX;
     collision_objects[1].primitives[0].dimensions.resize(3);
@@ -76,7 +76,7 @@ void PickAndPlace::addCollisionObjects(moveit::planning_interface::PlanningScene
 
 //    definition of moveable object
     collision_objects[2].id = "object";
-    collision_objects[2].header.frame_id = "base_link";
+    collision_objects[2].header.frame_id = "Link_0";
     collision_objects[2].primitives.resize(1);
     collision_objects[2].primitives[0].type = collision_objects[2].primitives[0].BOX;
     collision_objects[2].primitives[0].dimensions.resize(3);
@@ -116,7 +116,7 @@ void PickAndPlace::openGripper(trajectory_msgs::JointTrajectory &gripper_joint_t
 //    resize joint names vector and set name
     gripper_joint_trajectory.joint_names.resize(1);
     if (arm_type == "aria_v2")
-        gripper_joint_trajectory.joint_names[0] = "finger_joint_1";
+        gripper_joint_trajectory.joint_names[0] = "Joint_7";
     else if (arm_type == "aria_v1")
         gripper_joint_trajectory.joint_names[0] = "FJoint1";
 
@@ -133,7 +133,7 @@ void PickAndPlace::closeGripper(trajectory_msgs::JointTrajectory &gripper_joint_
 //    resize joint names vector and set name
     gripper_joint_trajectory.joint_names.resize(1);
     if (arm_type == "aria_v2")
-        gripper_joint_trajectory.joint_names[0] = "finger_joint_1";
+        gripper_joint_trajectory.joint_names[0] = "Joint_7";
     else if (arm_type == "aria_v1")
         gripper_joint_trajectory.joint_names[0] = "FJoint1";
 
@@ -149,19 +149,19 @@ void PickAndPlace::closeGripper(trajectory_msgs::JointTrajectory &gripper_joint_
 void PickAndPlace::pickFromTable1(moveit::planning_interface::MoveGroupInterface &group) {
     grasps_table_1.resize(1);
 //    grasps pose
-    grasps_table_1[0].grasp_pose.header.frame_id = "base_link";
+    grasps_table_1[0].grasp_pose.header.frame_id = "Link_0";
     orientation_pick_table_1.setRPY(M_PI / 2, -M_PI, 0);
     grasps_table_1[0].grasp_pose.pose.orientation = tf2::toMsg(orientation_pick_table_1);
     grasps_table_1[0].grasp_pose.pose.position.x = 0;
     grasps_table_1[0].grasp_pose.pose.position.y = -0.47;
     grasps_table_1[0].grasp_pose.pose.position.z = 0.187;
 //    pre grasps approach
-    grasps_table_1[0].pre_grasp_approach.direction.header.frame_id = "base_link";
+    grasps_table_1[0].pre_grasp_approach.direction.header.frame_id = "Link_0";
     grasps_table_1[0].pre_grasp_approach.direction.vector.y = -1;
     grasps_table_1[0].pre_grasp_approach.min_distance = 0.095;
     grasps_table_1[0].pre_grasp_approach.desired_distance = 0.115;
 //    post grasps pose
-    grasps_table_1[0].post_grasp_retreat.direction.header.frame_id = "base_link";
+    grasps_table_1[0].post_grasp_retreat.direction.header.frame_id = "Link_0";
     grasps_table_1[0].post_grasp_retreat.direction.vector.z = 1;
     grasps_table_1[0].post_grasp_retreat.min_distance = 0.1;
     grasps_table_1[0].post_grasp_retreat.desired_distance = 0.15;
@@ -177,7 +177,7 @@ void PickAndPlace::pickFromTable1(moveit::planning_interface::MoveGroupInterface
 void PickAndPlace::pickFromTable2(moveit::planning_interface::MoveGroupInterface &group) {
     grasps_table_2.resize(1);
 //    grasps pose
-    grasps_table_2[0].grasp_pose.header.frame_id = "base_link";
+    grasps_table_2[0].grasp_pose.header.frame_id = "Link_0";
     orientation_pick_table_2 = orientation_place_table_2;
     grasps_table_2[0].grasp_pose.pose.orientation = tf2::toMsg(orientation_pick_table_2);
     grasps_table_2[0].grasp_pose.pose.position.x = 0;
@@ -185,13 +185,13 @@ void PickAndPlace::pickFromTable2(moveit::planning_interface::MoveGroupInterface
     grasps_table_2[0].grasp_pose.pose.position.z = (collision_objects[0].primitives[0].dimensions[2] +
                                                     (collision_objects[2].primitives[0].dimensions[2]) / 2) + 0.1;
 //    pre grasps approach
-    grasps_table_2[0].pre_grasp_approach.direction.header.frame_id = "base_link";
+    grasps_table_2[0].pre_grasp_approach.direction.header.frame_id = "Link_0";
     grasps_table_2[0].pre_grasp_approach.direction.vector.y = 1.0;
     grasps_table_2[0].pre_grasp_approach.min_distance = 0.07;
     grasps_table_2[0].pre_grasp_approach.desired_distance = 0.115;
 
 //    post grasps pose
-    grasps_table_2[0].post_grasp_retreat.direction.header.frame_id = "base_link";
+    grasps_table_2[0].post_grasp_retreat.direction.header.frame_id = "Link_0";
     grasps_table_2[0].post_grasp_retreat.direction.vector.z = 1;
     grasps_table_2[0].post_grasp_retreat.min_distance = 0.1;
     grasps_table_2[0].post_grasp_retreat.desired_distance = 0.15;
@@ -207,7 +207,7 @@ void PickAndPlace::pickFromTable2(moveit::planning_interface::MoveGroupInterface
 void PickAndPlace::placeOnTable2(moveit::planning_interface::MoveGroupInterface &group) {
     place_location_table_2.resize(1);
 //    location place
-    place_location_table_2[0].place_pose.header.frame_id = "base_link";
+    place_location_table_2[0].place_pose.header.frame_id = "Link_0";
     orientation_place_table_2.setRPY(0, 0, -M_PI);
     place_location_table_2[0].place_pose.pose.orientation = tf2::toMsg(orientation_place_table_2);
     place_location_table_2[0].place_pose.pose.position.x = 0;
@@ -215,12 +215,12 @@ void PickAndPlace::placeOnTable2(moveit::planning_interface::MoveGroupInterface 
     place_location_table_2[0].place_pose.pose.position.z = collision_objects[0].primitives[0].dimensions[2] +
                                                            (collision_objects[2].primitives[0].dimensions[2]) / 2;
 //    pre place approach
-    place_location_table_2[0].pre_place_approach.direction.header.frame_id = "base_link";
+    place_location_table_2[0].pre_place_approach.direction.header.frame_id = "Link_0";
     place_location_table_2[0].pre_place_approach.direction.vector.z = -1.0;
     place_location_table_2[0].pre_place_approach.min_distance = 0.0857;
     place_location_table_2[0].pre_place_approach.desired_distance = 0.121;
 //    post place retreat
-    place_location_table_2[0].post_place_retreat.direction.header.frame_id = "base_link";
+    place_location_table_2[0].post_place_retreat.direction.header.frame_id = "Link_0";
     place_location_table_2[0].post_place_retreat.direction.vector.y = -1.0;
     place_location_table_2[0].post_place_retreat.min_distance = 0.08;
     place_location_table_2[0].post_place_retreat.desired_distance = 0.1;
