@@ -36,22 +36,22 @@ cd ~/path_to_your_workspace
 catkin_make
 ```
 
-Also, make sure you have installed `ros-control`, `controller-manager` and `Moveit` (if not, run in terminal `sudo apt-get install ros-melodic-ros-control`, `sudo apt-get install ros-melodic-joint-trajectory-controller` `sudo apt-get install ros-melodic-controller-manager` and `sudo apt-get install ros-melodic-moveit*`).
+Also, make sure you have installed `ros-control`, `controller-manager` and `Moveit` (if not, run in terminal `sudo apt-get install ros-<rosdistro>-ros-control`, `sudo apt-get install ros-<rosdistro>-joint-trajectory-controller` `sudo apt-get install ros-<rosdistro>-controller-manager`, `sudo apt-get install ros-<rosdistro>-moveit*` and `sudo apt-get install ros-<rosdistro>-joint-state-controller`).
 
 # How to use
 
 ### Work with real arm
 To work with real robotic arm, run in terminal:
 
-    roslaunch aria_bringup aria_robot.launch
+    roslaunch aria_startup aria_startup.launch
 
 By default it will startup connection between Aria arm and ROS without possibility to use ROS Control. In order to use Aria arm with ROS Control please run:
 
-    roslaunch aria_bringup aria_robot.launch use_ros_control:=true
+    roslaunch aria_startup aria_startup.launch use_ros_control:=true
 
 If you want to use additionally `rqt_joint_trajectory_controller`  run the following commend: 
 
-    roslaunch aria_bringup aria_robot.launch use_ros_control:=true use_joint_trajectory_controller_gui:=true
+    roslaunch aria_startup aria_startup.launch use_ros_control:=true use_joint_trajectory_controller_gui:=true
 
 In order to use MoveIt! run in the next shell: 
 
