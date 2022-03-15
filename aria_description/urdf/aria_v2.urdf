@@ -322,7 +322,7 @@
   </link>
   <joint
     name="Joint_5"
-    type="revolute">
+    type="continuous">
     <origin
       xyz="0.25625 0.01475 0"
       rpy="0 0 0" />

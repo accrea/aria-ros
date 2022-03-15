@@ -58,6 +58,8 @@ void RosControlUDP::read() {
     if (AriaClient_isConnected() > 0) {
         for (int j = 0; j < 7; ++j) {
             joint_position_[j] = AriaClient_GetJointPos(j + 1);
+            joint_velocity_[j] = AriaClient_GetJointVel(j + 1);
+            joint_effort_[j] = AriaClient_GetJointTrq(j + 1);
         }
         AriaClient_GetArmEEPosition(&EEPosAct_[0]);
         AriaClient_GetArmEEQuaternion(&EEQuatAct_[0]);
